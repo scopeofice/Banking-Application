@@ -1,0 +1,50 @@
+/* HomePage.css */
+
+body {
+    margin: 0;
+    padding: 0;
+  }
+  
+    
+  .homepage {
+    background-color: black;
+    color: white;
+    padding: 20px;
+    border: 1px solid white;
+    border-radius: 20px;
+    margin: 2px;
+    width: 700px;
+  }
+  
+  header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .features {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 40px;
+  }
+  
+  .feature {
+    flex: 1;
+    padding: 20px;
+    border: 1px solid white;
+    border-radius: 20px;
+    margin: 2px;
+  }
+  
+  .cta {
+    text-align: center;
+    padding: 20px;
+    border: 1px solid white;
+    border-radius: 20px;
+    margin: 2px;
+  }
+    
+  footer {
+    text-align: center;
+    padding: 10px;
+  }
+  
