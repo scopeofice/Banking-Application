@@ -3,6 +3,7 @@ package com.bank.itc.controller;
 import com.bank.itc.dto.*;
 import com.bank.itc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Role;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -17,8 +18,8 @@ public class UserController {
     public BankResponse createAccount(@RequestBody UserRequestDTO userRequest){
         return userService.createAccount(userRequest);
     }
-    @GetMapping("/balanceEnquiry")
-    public BankResponse balaceEnquiry(@RequestBody EnquiryRequest request){
+    @GetMapping("/balanceEnquiry/{request}")
+    public String balanceEnquiry(@PathVariable String request){
         return userService.balanceEnquiry(request);
     }
 

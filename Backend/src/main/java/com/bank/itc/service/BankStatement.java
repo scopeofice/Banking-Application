@@ -7,7 +7,9 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @AllArgsConstructor
@@ -21,7 +23,7 @@ public class BankStatement {
         return transactionsList;
     }
     public List<Transactions> getAllTransactions(String accountNumber){
-        List<Transactions> transactionsList = transactionRepository.findAll().stream().filter(transactions -> transactions.getAccountNumber().equals(accountNumber)).toList();
+        List<Transactions> transactionsList = transactionRepository.findAll().stream().filter(transactions -> transactions.getAccountNumber().equals(accountNumber)).sorted(Comparator.comparing(Transactions::getModifiedAt).reversed()).collect(Collectors.toList());;
 
         return transactionsList;
     }

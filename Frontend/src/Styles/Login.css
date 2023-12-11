@@ -50,3 +50,14 @@ input, select {
   .link{
     margin-left: 10px;
   }
+
+
+  .bankimg{
+    width: 200px;
+    margin: 50px;
+  }
+
+  .transfer{
+    display: flex;
+
+  }

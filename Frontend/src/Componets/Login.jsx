@@ -17,14 +17,9 @@ export default function Login() {
             [e.target.name]: e.target.value, 
         });
     };
-    const [user, setUser] = useState({});
     const handleSubmit = async (e) => {
         try {
             const resp = await axios.post("http://localhost:8080/api/user/login",credientials);
-            
-            // setUser(resp.data);
-
-            // console.log(resp.data)
             
             sessionStorage.setItem("user",JSON.stringify(resp.data));
             

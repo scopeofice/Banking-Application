@@ -15,7 +15,9 @@ body {
     margin: 2px;
     width: 700px;
   }
-  
+  .icon{
+    width: 100px;
+  }
   header {
     text-align: center;
     margin-bottom: 20px;
@@ -29,6 +31,10 @@ body {
   
   .feature {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     padding: 20px;
     border: 1px solid white;
     border-radius: 20px;
@@ -48,3 +54,12 @@ body {
     padding: 10px;
   }
   
+
+  @media only screen and (max-width: 720px) {
+    .features{
+      flex-direction: column;
+    }
+    img{
+      width: 150px;
+    }
+  }

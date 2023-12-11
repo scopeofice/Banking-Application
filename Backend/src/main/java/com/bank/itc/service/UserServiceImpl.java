@@ -82,13 +82,13 @@ public class UserServiceImpl implements UserService{
         Authentication authentication = null;
         authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDTO.getEmail(), loginDTO.getPassword()));
 
-        EmailDTO loginAlert = EmailDTO.builder()
-                .subject("You're logged in!")
-                .recipient(loginDTO.getEmail())
-                .messageBody("You logged into your account")
-                .build();
-
-        emailService.sendEmailAlert((loginAlert));
+//        EmailDTO loginAlert = EmailDTO.builder()
+//                .subject("You're logged in!")
+//                .recipient(loginDTO.getEmail())
+//                .messageBody("You logged into your account")
+//                .build();
+//
+//        emailService.sendEmailAlert((loginAlert));
 
         Optional<User> foundUser = userRepo.findByEmail(loginDTO.getEmail());
 
@@ -108,26 +108,35 @@ public class UserServiceImpl implements UserService{
 
     }
 
+//    @Override
+//    public BankResponse balanceEnquiry(EnquiryRequest request) {
+//        if(!userRepo.existsByAccountNumber(request.getAccountNumber())){
+//           return BankResponse.builder()
+//                   .responseCode(AccountUtils.ACCOUNT_NOT_EXISTS)
+//                   .responseMessage(AccountUtils.ACCOUNT_NOT_EXISTS_MESSAGE)
+//                   .accountInfo(null)
+//                   .build();
+//        }
+//        else{
+//            User foundUser = userRepo.findByAccountNumber(request.getAccountNumber());
+//            return BankResponse.builder()
+//                    .responseCode(AccountUtils.ACCOUNT_FOUND)
+//                    .responseMessage(AccountUtils.ACCOUNT_FOUND_MESSAGE)
+//                    .accountInfo(AccountInfo.builder()
+//                            .accountBalance(foundUser.getAccountBalance())
+//                            .accountNumber(request.getAccountNumber())
+//                            .accountName(foundUser.getFirstName()+" "+foundUser.getLastName())
+//                            .build())
+//                    .build();
+//        }
+//    }
+
     @Override
-    public BankResponse balanceEnquiry(EnquiryRequest request) {
-        if(!userRepo.existsByAccountNumber(request.getAccountNumber())){
-           return BankResponse.builder()
-                   .responseCode(AccountUtils.ACCOUNT_NOT_EXISTS)
-                   .responseMessage(AccountUtils.ACCOUNT_NOT_EXISTS_MESSAGE)
-                   .accountInfo(null)
-                   .build();
-        }
-        else{
-            User foundUser = userRepo.findByAccountNumber(request.getAccountNumber());
-            return BankResponse.builder()
-                    .responseCode(AccountUtils.ACCOUNT_FOUND)
-                    .responseMessage(AccountUtils.ACCOUNT_FOUND_MESSAGE)
-                    .accountInfo(AccountInfo.builder()
-                            .accountBalance(foundUser.getAccountBalance())
-                            .accountNumber(request.getAccountNumber())
-                            .accountName(foundUser.getFirstName()+" "+foundUser.getLastName())
-                            .build())
-                    .build();
+    public String balanceEnquiry(String request) {
+        if(!userRepo.existsByAccountNumber(request)){
+            return "User does not exists";
+        }else{
+            return userRepo.findByAccountNumber(request).getAccountBalance().toString();
         }
     }
 
@@ -232,8 +241,9 @@ public class UserServiceImpl implements UserService{
         }
         User userToDebit = userRepo.findByAccountNumber(request.getSourceAccountNumber());
         int comparisonResult = userToDebit.getAccountBalance().compareTo(request.getAmount());
+        boolean passwordCheck = userToDebit.getPassword().equals(request.getPassword());
 
-        if (comparisonResult < 0){
+        if (comparisonResult < 0 && !passwordCheck){
             return BankResponse.builder()
                     .responseCode(AccountUtils.INSUFFICIENT_BALANCE_CODE)
                     .responseMessage(AccountUtils.INSUFFICIENT_BALANCE_MESSAGE)
@@ -258,6 +268,7 @@ public class UserServiceImpl implements UserService{
                     .amount(request.getAmount())
                     .status("SUCCESS")
                     .build();
+            System.out.println("YYYY");
             transactionService.saveTransaction(transactionDTOCredit);
 
 

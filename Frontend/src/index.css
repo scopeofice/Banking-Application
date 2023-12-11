@@ -70,3 +70,22 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .userpage-profile{
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+  .dp{
+    width: 150px;
+  }
+  button{
+    scale: 0.8;
+  }
+  .bankimg{
+    display: none;
+  }
+  .form{
+    width: 80%;
+  }
+}
