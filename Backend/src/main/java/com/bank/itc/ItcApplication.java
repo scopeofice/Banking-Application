@@ -11,3 +11,14 @@ public class ItcApplication {
 	}
 
 }
+//@SpringBootApplication
+//public class ItcApplication extends SpringBootServletInitializer {
+//	public static void main(String[] args) {
+//		SpringApplication.run(ItcApplication.class, args);
+//	}
+//
+//	@Override
+//	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+//		return builder.sources(ItcApplication.class);
+//	}
+//}
